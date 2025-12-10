@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Regalito</title>
+  <!-- Fuente elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #001f3f, #000000);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Regalo */
+    .gift {
+      font-size: 12rem;
+      cursor: pointer;
+      animation: pulse 2s infinite, float 4s ease-in-out infinite;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      user-select: none;
+      z-index: 2;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Carta */
+    .card {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+      max-width: 80%;
+    }
+
+    .card h1 {
+      font-size: 3rem;
+      margin: 0;
+      color: #d32f2f;
+      text-shadow: 0 0 10px #ffcc00;
+    }
+
+    .card p {
+      font-size: 2rem;
+      margin-top: 20px;
+      color: #000;
+      font-weight: bold;
+      animation: textPop 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes textPop {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Nieve */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 1.5rem;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Regalo -->
+  <div class="gift" id="gift" title="Haz click para abrir">🎁</div>
+  <!-- Carta -->
+  <div class="card" id="card">
+    <h1>Para ti</h1>
+    <p>Un Bloodsito?🗣️🔥 
+  </div>
+
+  <script>
+    // Generar copos de nieve
+    for (let i = 0; i < 40; i++) {
+      let snowflake = document.createElement("div");
+      snowflake.className = "snowflake";
+      snowflake.innerHTML = "❄";
+      snowflake.style.left = Math.random() * window.innerWidth + "px";
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + "px";
+      document.body.appendChild(snowflake);
+    }
+
+    // Animación al abrir el regalo
+    const gift = document.getElementById("gift");
+    const card = document.getElementById("card");
+
+    gift.addEventListener("click", () => {
+      gift.style.transform = "scale(1.5) rotate(20deg)";
+      gift.style.opacity = "0";
+
+      setTimeout(() => {
+        gift.style.display = "none";
+        card.style.display = "flex";
+      }, 600);
+    });
+  </script>
+</body>
+</html>
